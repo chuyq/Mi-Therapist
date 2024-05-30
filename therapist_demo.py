@@ -275,34 +275,16 @@ def gradio_ask(user_input, chatbot, chat_state):
     root_wav = "./face_generate/demo/video_processed/W015_neu_1_002"
     # face_files = generate_face(root_wav)
     face_path = ("./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4",)
-    # chatbot[-1][1] = face_path
-    # multi_response = [response, face_path]
-    # chatbot = multi_response
-    # print(chatbot)
 
-    # face_html = "<video src='/file={}' style='width: 140px; max-width:none; max-height:none' preload='auto' controls></video>".format(
-    #    "./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4"
-    # )
-    response1 = "Would you like to tell me about it?"
-    response2 = "What do you want to do? Do you want to hit it?"
-    user_input2 = "You know, a dark-coated animal was lying on the shore of the sea. and I was standing over it with a large stick."
+    face_html = "<video src='/file={}' style='width: 140px; max-width:none; max-height:none' preload='auto' controls></video>".format(
+       "./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4"
+    )
 
-    face_html = f"""
-    <p>{response1}</p>
-    <video src='/file=./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4' style='width: 140px; max-width:none; max-height:none' preload='auto' controls></video>
-    """
-
-    face_html2 = f"""
-    <p>{response2}</p>
-    <video src='/file=./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4' style='width: 140px; max-width:none; max-height:none' preload='auto' controls></video>
-    """
 
     chatbot = [
         *chatbot,
         (user_input, None),
         (None, face_html),
-        (user_input2, None),
-        (None, face_html2),
     ]
 
 
