@@ -1,0 +1,16 @@
+CUDA_VISIBLE_DEVICES=1 python train.py \
+    --config_name lama \
+    --inputter_name lama \
+    --eval_input_file /mnt/storage/chuyuqi/code/data_lama/val_lama.txt \
+    --seed 13 \
+    --max_input_length 160 \
+    --max_decoder_input_length 40 \
+    --train_batch_size 16 \
+    --gradient_accumulation_steps 1 \
+    --eval_batch_size 16 \
+    --learning_rate 3e-5 \
+    --num_epochs 2 \
+    --warmup_steps 100 \
+    --fp16 false \
+    --loss_scale 0.0 \
+    --pbar true
