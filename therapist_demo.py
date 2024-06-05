@@ -210,11 +210,32 @@ def generate_face(root_wav):
     return mp4_files
 
 
-def save_history(history):
-    save_name = datetime.datetime.now().strftime('%Y-%m-%d%H%M%S')
-    if len(history['dialog']) > 0:
-        with open(os.path.join('output_dir', save_name + '.json'), 'w') as f:
-            json.dump(history, f, ensure_ascii=False, indent=2)
+def video_llama(gr_video, gr_img, text_input, chat_state,chatbot,audio_flag):
+    if args.model_type == 'vicuna':
+        chat_state = default_conversation.copy()
+    else:
+        chat_state = conv_llava_llama_2.copy()
+    if gr_img is None and gr_video is None:
+        return None, None, None, gr.update(interactive=True), chat_state, None
+    elif gr_img is not None and gr_video is None:
+        print(gr_img)
+        chatbot = chatbot + [((gr_img,), None)]
+        img_list = []
+        llm_message = chat.upload_img(gr_img, chat_state, img_list)
+        return gr.update(interactive=False), gr.update(interactive=False), gr.update(interactive=True, placeholder='Type and press Enter'), gr.update(value="Start Chatting", interactive=False), chat_state, img_list,chatbot
+    elif gr_video is not None and gr_img is None:
+        print(gr_video)
+        chatbot = chatbot + [((gr_video,), None)]
+        chat_state.system =  ""
+        img_list = []
+        if audio_flag:
+            llm_message = chat.upload_video(gr_video, chat_state, img_list)
+        else:
+            llm_message = chat.upload_video_without_audio(gr_video, chat_state, img_list)
+        return gr.update(interactive=False), gr.update(interactive=False), gr.update(interactive=True), gr.update(value="Start Chatting", interactive=False), chat_state, img_list,chatbot
+    else:
+        # img_list = []
+        return gr.update(interactive=False), gr.update(interactive=False),chat_state, None,chatbot
 
 
     
