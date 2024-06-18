@@ -291,10 +291,10 @@ def gradio_ask(user_input, chatbot, chat_state):
         'emotion': 'neutral'
     })
 
-    # generate_audio(response)
+    generate_audio(response)
 
     root_wav = "./face_generate/demo/video_processed/W015_neu_1_002"
-    # face_files = generate_face(root_wav)
+    face_files = generate_face(root_wav)
     face_path = ("./face_generate/demo/output/Capture5_neu_W015_neu_1_002.mp4",)
 
     face_html = "<video src='/file={}' style='width: 140px; max-width:none; max-height:none' preload='auto' controls></video>".format(
@@ -344,15 +344,25 @@ scenarios = [
 
 def update_text_input(scenario_content,video):
     if scenario_content == "Breakups or Divorce":
-        return "I left my boyfriend, Andrew, We had a big blowout."
+        text_input = "I left Andrew, I did some terrible things last night, I feel sick."
+        input_video = video_llama(video, text_input)
+        return input_video
     elif scenario_content == "The relationship with friends and family":
-        return "I've been under pressure for years, and she has never supported me. All the other mothers are right there, all over us visiting the gym, the training camps, all of it."
+        text_input = "I've been under pressure for years, and she has never supported me. All the other mothers are right there, all over us visiting the gym, the training camps, all of it."
+        input_video = video_llama(video, text_input)
+        return input_video
     elif scenario_content == "Dream Analysis":
-        return "I had this very strange dream, and I was quite disturbed by it."
+        text_input = "I had this very strange dream, and I was quite disturbed by it."
+        input_video = video_llama(video, text_input)
+        return input_video
     elif scenario_content == "Illness Coping":
-        return "But now I'm just lying in bed. I'm not sleeping. I'm not working."
+        text_input = "But now I'm just lying in bed. I'm not sleeping. I'm not working."
+        input_video = video_llama(video, text_input)
+        return input_video
     elif scenario_content == "Childhood Shadow":
-        return "The move to Baltimore marked the end of my childhood. My father walked out; My mother got sicker, And I was forced to take care of her."
+        text_input = "The move to Baltimore marked the end of my childhood. My father walked out; My mother got sicker, And I was forced to take care of her."
+        input_video = video_llama(video, text_input)
+        return input_video
     
 
 # 'snehilsanyal/scikit-learn'
